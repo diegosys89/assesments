@@ -3,7 +3,6 @@ from google.cloud import bigquery
 import json
 
 app = Flask(__name__)
-
 project_id = 'makikuna-integral'
 dataset_id = 'globant_assessment'
 
@@ -13,20 +12,19 @@ with open("config_data.json") as jc:
 @app.route('/insert_data', methods=['POST'])
 def insert_data():
     try:
-        # Get the JSON data from the request
+        #Get the JSON data from the request
         data = request.json
 
         if not isinstance(data, list):
             return jsonify({"error": "Data must be a list of dictionaries"}), 400
 
-        # Get the table name from the request
+        #Table name from the request
         table_name = request.args.get('table_name')
         print(f"table_name: {table_name}")
         if not table_name:
             return jsonify({"error": "Missing 'table_name' parameter"}), 400
         
         if table_name in [i["table_name"] for i in data_info]:
-            # Initialize BigQuery client
             client = bigquery.Client(project=project_id)
             table_ref = f"{project_id}.{dataset_id}.{table_name}"
             validated_data = validate_json_list(data, table_name)
@@ -47,7 +45,7 @@ def insert_data():
         return jsonify({"error": str(e)}), 500
 
 def validate_json_data(data, bq_schema):
-    #type mapping
+    #Type mapping
     data_types = {"INTEGER":int, "FLOAT":float, "STRING":str}
 
     for field in bq_schema:
