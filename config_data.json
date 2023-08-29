@@ -1,0 +1,29 @@
+[
+    {
+        "table_name":"hired_employees",
+        "path":"data/hired_employees.csv",
+        "schema":[
+                {"name":"id", "type":"INTEGER"},
+                {"name":"name", "type":"STRING"},
+                {"name":"datetime", "type":"STRING"},
+                {"name":"department_id", "type":"INTEGER"},
+                {"name":"job_id", "type":"INTEGER"}
+        ]
+    },
+    {
+        "table_name":"departments",
+        "path":"data/departments.csv",
+        "schema":[
+                {"name":"id", "type":"INTEGER"},
+                {"name":"department", "type":"STRING"}
+        ]
+    },
+    {
+        "table_name":"jobs",
+        "path":"data/jobs.csv",
+        "schema":[
+            {"name":"id", "type":"INTEGER"},
+            {"name":"job", "type":"STRING"}
+        ]
+    }
+]
